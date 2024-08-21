@@ -10,9 +10,7 @@ const getAll = catchError(async(req, res) => {
 });
 
 const create = catchError(async(req, res) => {
-    const { password } = req.body
-    const hashPaswword = await bcrypt.hash(password, 10)
-    const result = await User.create({ ...req.body, password: hashPaswword });
+    const result = await User.create(req.body);
     return res.status(201).json(result);
 });
 
@@ -25,6 +23,10 @@ const remove = catchError(async(req, res) => {
 
 const update = catchError(async(req, res) => {
     const { id } = req.params;
+
+    const deleteFields = ['password', 'email']
+    deleteFields.forEach((field)=> delete req.body[field])
+    
     const result = await User.update(
         req.body,
         { where: {id}, returning: true }
@@ -36,25 +38,29 @@ const update = catchError(async(req, res) => {
 const login = catchError(async(req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ where: {email} });
-    if(!user) return res.status(401).json({ error: "Invalid credentials"})
+    if(!user) return res.status(401).json({ message: "User not found"})
 
     const isValid = await bcrypt.compare(password, user.password)
-    if(!isValid) return res.status(401).json({ error: "Invalid credentials"});
+    if(!isValid) return res.status(401).json({ message: "User not found"});
     
     const token = jwt.sign(
         { user },
         process.env.TOKEN_SECRET,
-        { expires: '1d'}
+        { expiresIn: '1d'}
     )
     return res.status(201).json({ user, token});
 })
 
-
+const logged = catchError(async(req, res) => {
+    const user = req.user
+    return res.json(user)
+})
 
 module.exports = {
     getAll,
     create,
     remove,
     update,
-    login
+    login,
+    logged
 }
