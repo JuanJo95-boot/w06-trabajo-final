@@ -24,7 +24,7 @@ const remove = catchError(async(req, res) => {
 const update = catchError(async(req, res) => {
     const { id } = req.params;
 
-    const deleteFields = ['password', 'email']
+    const deleteFields = ['phone','password', 'email']
     deleteFields.forEach((field)=> delete req.body[field])
     
     const result = await User.update(
@@ -48,7 +48,7 @@ const login = catchError(async(req, res) => {
         process.env.TOKEN_SECRET,
         { expiresIn: '1d'}
     )
-    return res.status(201).json({ user, token});
+    return res.status(200).json({ user, token});
 })
 
 const logged = catchError(async(req, res) => {
