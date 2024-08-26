@@ -3,6 +3,7 @@ const request = require("supertest")
 const app = require('../app')
 const Category = require('../models/Category')
 const Product = require('../models/Product')
+const { default: test } = require('node:test')
 
 
 let TOKEN
@@ -97,5 +98,30 @@ test("GET -> 'BASE_URL/:id', should return statusCode 200, and res.body.quantity
 
       expect(res.body.product.categoryId).toBeDefined()
       expect(res.body.product.categoryId).toBe(product.categoryId)
+})
+
+test("PUT -> 'BASE_URL/:id', should return statusCode 200 and res.body.quantity === updateCart.quantity", async () => {
+    const updateCart = {
+        quantity: 4
+    }
+    
+    const res = await request(app)
+      .put(`${BASE_URL}/${cartId}`)
+      .send(updateCart)
+      .set('Authorization', `Bearer ${TOKEN}`)
+    //console.log(res.body);
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toBeDefined()
+    expect(res.body.quantity).toBe(updateCart.quantity)
+
+
+})
+
+test("DELETE -> 'BASE_URL/:id', should return statusCode  204", async () => {
+    const res = await request(app)
+      .delete(`${BASE_URL}/${cartId}`)
+      .set('Authorization', `Bearer ${TOKEN}`)
+
+    expect(res.statusCode).toBe(204)
 })
 
