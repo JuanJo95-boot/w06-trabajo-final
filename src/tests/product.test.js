@@ -23,7 +23,7 @@ beforeAll(async ()=>{
       .send(hits)
 
     TOKEN = res.body.token
-    console.log(TOKEN);
+    //console.log(TOKEN);
 
     category = await Category.create({ name: 'Lady dress'})
 
@@ -51,7 +51,7 @@ test("POST -> 'BASE_URL', should return statusCode 201, and res.body.title === p
       .send(product)
       .set('Authorization', `Bearer ${TOKEN}`)
 
-      console.log(res.body);
+      //console.log(res.body);
       productId = res.body.id
 
     expect(res.statusCode).toBe(201)
