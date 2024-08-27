@@ -83,7 +83,7 @@ test("GET -> 'BASE_URL/:id', should return status code 200, and res.body.title =
     expect(res.body.category.id).toBe(category.id)
   })
 
-  test("PUT -> 'BASE_URL/:id', should return status code 200, and res.body.title === updateProduct.title", async () => {
+test("PUT -> 'BASE_URL/:id', should return status code 200, and res.body.title === updateProduct.title", async () => {
 
     const updateProduct = {
       title: 'Jeans levis'
@@ -101,7 +101,7 @@ test("GET -> 'BASE_URL/:id', should return status code 200, and res.body.title =
     expect(res.body.categoryId).toBe(category.id)
   })
 
-  test("DELETE -> 'BASE_URL/:id', should return status code 204", async () => {
+test("DELETE -> 'BASE_URL/:id', should return status code 204", async () => {
     const res = await request(app)
       .delete(`${BASE_URL}/${productId}`)
       .set('Authorization', `Bearer ${TOKEN}`)

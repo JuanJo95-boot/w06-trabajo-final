@@ -37,10 +37,7 @@ const create = catchError(async(req, res) => {
     return res.status(201).json(results)
 });
 
-
-
 module.exports = {
     getAll,
-    create,
-    
+    create, 
 }

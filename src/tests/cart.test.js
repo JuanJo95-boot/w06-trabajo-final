@@ -53,7 +53,7 @@ afterAll(async () => {
     await Product.destroy({where: {id: product.id}})
 })
 
-test("POST -> 'BASE_URL', should return statusCode 201 ans res.body.quantity === cart.quantity", async () => {
+test("POST -> 'BASE_URL', should return statusCode 201 and res.body.quantity === cart.quantity", async () => {
     const res = await request(app)
        .post(BASE_URL)
        .send(cart)

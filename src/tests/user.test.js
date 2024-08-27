@@ -57,7 +57,7 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 2",
 
 //PUT
 
-test("PUT -> 'BASE_URL/:ID', should return statusCode 200, and res.body.firstName === userUpdate.firstName", async () => {
+test("PUT -> 'BASE_URL/:id', should return statusCode 200, and res.body.firstName === userUpdate.firstName", async () => {
   const userUpdate = {
     firstName: "Jose"
   }
@@ -104,7 +104,7 @@ test("POST -> 'BASE_URL/login', should return status code 401", async () => {
   
 })
 
-test("DELETE -> 'BASE_URL/:ID', should return statusCode 204",async () => {
+test("DELETE -> 'BASE_URL/:id', should return statusCode 204",async () => {
   const res = await request(app)
    .delete(`${BASE_URL}/${userId}`)
    //.send()
