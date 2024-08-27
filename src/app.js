@@ -4,7 +4,7 @@ const cors = require('cors');
 const router = require('./routes');
 const errorHandler = require('./utils/errorHandler');
 require('dotenv').config();
-
+const path = require('path')
 // Esta es nuestra aplicación
 const app = express();
 
@@ -14,6 +14,8 @@ app.use(helmet({
     crossOriginResourcePolicy: false,
 }));
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));// Se coloca encima de la ruta, dirname es la ruta absoluta hasta src, en donde se esta creando una carpeta llamada public, en donde habrá archivos estáticos.
 
 app.use('/api/v1', router);
 
