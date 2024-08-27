@@ -97,7 +97,7 @@ test("GET -> 'BASE_URL', should return statusCode 200 and res.body.quantity === 
     expect(res.body[0].product.id).toBe(product.id)
     expect(res.body[0].product.categoryId).toBe(category.id) 
 
-    console.log(res.body);
+    //console.log(res.body);
 })
 
 
