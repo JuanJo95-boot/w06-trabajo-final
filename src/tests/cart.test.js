@@ -60,7 +60,7 @@ test("POST -> 'BASE_URL', should return statusCode 201 ans res.body.quantity ===
        .set('Authorization', `Bearer ${TOKEN}`)
 
     cartId = res.body.id
-    console.log(res.body);
+    //console.log(res.body);
     expect(res.statusCode).toBe(201)
     expect(res.body).toBeDefined()
     expect(res.body.quantity).toBe(cart.quantity)
